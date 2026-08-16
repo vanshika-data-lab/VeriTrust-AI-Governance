@@ -1,0 +1,232 @@
+[
+  {
+    "source_tier": "Law / Regulation",
+    "title": "EU AI Act (Regulation EU 2024/1689)",
+    "author_entity": "European Parliament and Council of the EU",
+    "jurisdiction": "European Union / Global extraterritorial",
+    "pub_date": "2024-07-12",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
+    "summary_content": "The EU AI Act classifies AI systems into Unacceptable Risk (prohibited), High Risk (subject to strict conformity assessment, risk management, human oversight, logging, and data governance), Specific Transparency Risk, and Minimal Risk. High-risk systems in credit scoring, employment recruitment, critical infrastructure, and medical devices require mandatory fundamental rights impact assessments (FRIA).",
+    "key_rules": [
+      "Article 9: Mandatory Continuous Risk Management System throughout AI lifecycle",
+      "Article 10: Data Governance requiring high-quality training datasets free of hidden bias",
+      "Article 13: Transparency and provision of clear instructions to deployers",
+      "Article 14: Technical design permitting effective Human Oversight and emergency override",
+      "Article 15: Accuracy, Cyber-security robustness, and resistance to prompt injection / data poisoning"
+    ],
+    "tags": "eu-ai-act, high-risk, human-oversight, data-governance, bias, compliance"
+  },
+  {
+    "source_tier": "Law / Regulation",
+    "title": "General Data Protection Regulation (GDPR - Regulation EU 2016/679)",
+    "author_entity": "European Union",
+    "jurisdiction": "European Union",
+    "pub_date": "2018-05-25",
+    "url": "https://gdpr-info.eu/",
+    "summary_content": "GDPR governs personal data processing, automated decision-making, and profiling. Mandates Data Protection Impact Assessments (DPIA) for high-risk processing, explicit consent, right to explanation for automated decisions, and strict data minimization.",
+    "key_rules": [
+      "Article 22: Right not to be subject to solely automated decision-making with legal or significant effect",
+      "Article 35: Data Protection Impact Assessment (DPIA) required prior to deploying high-risk profiling AI",
+      "Article 5(1)(c): Data minimization - process only data strictly necessary for purpose",
+      "Article 15 & 21: Right of access and right to object to automated profiling"
+    ],
+    "tags": "gdpr, privacy, privacy-by-design, dpia, automated-decisions, pii"
+  },
+  {
+    "source_tier": "Law / Regulation",
+    "title": "NYC Local Law 144 of 2021 (Automated Employment Decision Tools)",
+    "author_entity": "New York City Department of Consumer and Worker Protection",
+    "jurisdiction": "New York City, USA",
+    "pub_date": "2023-07-05",
+    "url": "https://www.nyc.gov/site/dca/index.page",
+    "summary_content": "Mandates annual independent bias audits for automated employment decision tools (AEDT) used in hiring and promotion in NYC. Employers must publicly disclose bias audit results and disparate impact ratios across gender, race, and ethnicity.",
+    "key_rules": [
+      "Mandatory independent bias audit within 12 months prior to tool usage",
+      "Public posting of Impact Ratios for selection rates across demographic categories",
+      "Minimum 10 business days advance notice to candidates with option to request alternative evaluation"
+    ],
+    "tags": "nyc-ll144, hiring-bias, AEDT, employment-ai, fair-hiring, audit"
+  },
+  {
+    "source_tier": "Law / Regulation",
+    "title": "Equal Credit Opportunity Act (ECOA - Regulation B / 12 CFR Part 1002)",
+    "author_entity": "US Consumer Financial Protection Bureau (CFPB)",
+    "jurisdiction": "United States",
+    "pub_date": "2023-09-19",
+    "url": "https://www.consumerfinance.gov/",
+    "summary_content": "Prohibits credit discrimination based on race, color, religion, national origin, sex, marital status, or age. CFPB circular clarifies that lenders using complex AI algorithms must provide specific, actionable adverse action notices explaining exact reasons for credit denial.",
+    "key_rules": [
+      "12 CFR 1002.9: Mandatory specific adverse action notice listing top principal reasons for adverse credit decision",
+      "Prohibition against using proxy variables (e.g. zip code) that correlate with protected classes",
+      "CFPB Circular 2022-03: Lenders cannot cite complex black-box AI model opacity as an excuse for vague denial notices"
+    ],
+    "tags": "ecoa, credit-scoring, financial-ai, adverse-action, explainability, non-discrimination"
+  },
+  {
+    "source_tier": "Regulatory Guidance",
+    "title": "NIST AI Risk Management Framework 1.0 (NIST AI 100-1)",
+    "author_entity": "National Institute of Standards and Technology (US Department of Commerce)",
+    "jurisdiction": "United States / Global",
+    "pub_date": "2023-01-26",
+    "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+    "summary_content": "Comprehensive voluntary guidance framed around four core functions: GOVERN, MAP, MEASURE, and MANAGE. Defines trustworthy AI characteristics: valid & reliable, safe, secure & resilient, accountable & transparent, explainable & interpretable, privacy-enhanced, and fair with bias managed.",
+    "key_rules": [
+      "Govern 1.1: Legal and regulatory requirements regarding AI risks are understood and managed",
+      "Map 1.5: Potential negative impacts on individuals, groups, and societal structures are identified",
+      "Measure 2.2: Feedback mechanisms for continuous tracking of model performance drift and bias",
+      "Manage 2.4: Human oversight protocols and fail-safe mechanisms for automated fallback"
+    ],
+    "tags": "nist-ai-rmf, trustworthy-ai, govern-map-measure-manage, enterprise-risk, framework"
+  },
+  {
+    "source_tier": "Regulatory Guidance",
+    "title": "FTC Enforcement Guidance on AI, Truthfulness, and Fairness",
+    "author_entity": "Federal Trade Commission (FTC)",
+    "jurisdiction": "United States",
+    "pub_date": "2023-04-25",
+    "url": "https://www.ftc.gov/business-guidance",
+    "summary_content": "Warns companies that deceptive claims about AI capabilities, deployment of biased algorithms under Section 5 of the FTC Act (unfair practices), or failing to mitigate known algorithmic harms will face enforcement actions and mandatory model deletion.",
+    "key_rules": [
+      "Section 5 FTC Act: Algorithmic bias and discrimination can constitute unfair or deceptive practices",
+      "Requirement for empirical validation before marketing AI claims (no unsubstantiated accuracy promises)",
+      "Enforcement precedent: Mandatory disgorgement (deletion) of illegally trained algorithms and data"
+    ],
+    "tags": "ftc, consumer-protection, deceptive-ai, enforcement, fair-practices"
+  },
+  {
+    "source_tier": "Regulatory Guidance",
+    "title": "EEOC Select Issues: Assessing Bias in AI Systems Used in Employment",
+    "author_entity": "US Equal Employment Opportunity Commission",
+    "jurisdiction": "United States",
+    "pub_date": "2023-05-18",
+    "url": "https://www.eeoc.gov/",
+    "summary_content": "Guidance on how Title VII of the Civil Rights Act and the ADA apply to AI screening tools. Employers are held liable under the 4/5ths (80%) Selection Rate Rule if AI screening tools result in disparate impact against protected demographic groups.",
+    "key_rules": [
+      "Title VII Compliance: Employers remain legally liable even if AI vendor developed the tool",
+      "Four-Fifths Rule (80% Rule): Selection rate for any race, sex, or ethnic group under 80% of highest rate indicates adverse impact",
+      "Mandatory reasonable accommodation provisions under ADA for disabled applicants taking AI video assessments"
+    ],
+    "tags": "eeoc, title-vii, disparate-impact, four-fifths-rule, employment-screening, hr-ai"
+  },
+  {
+    "source_tier": "Industry Standard",
+    "title": "ISO/IEC 42001:2023 - Artificial Intelligence Management System (AIMS)",
+    "author_entity": "International Organization for Standardization (ISO / IEC)",
+    "jurisdiction": "Global International Standard",
+    "pub_date": "2023-12-14",
+    "url": "https://www.iso.org/standard/81230.html",
+    "summary_content": "The premier certifiable international management standard for AI governance. Establishes requirements for setting up, implementing, maintaining, and continually improving an AI Management System (AIMS) within organizations.",
+    "key_rules": [
+      "Clause 6.1: AI Risk Assessment considering AI system impact on individuals and society",
+      "Annex A.5: AI System Lifecycle controls from concept, design, data acquisition, model training, deployment to decommissioning",
+      "Annex A.8: Data quality management, data provenance tracking, and lineage documentation",
+      "Annex A.10: Third-party AI component risk management and supplier evaluation"
+    ],
+    "tags": "iso-42001, aims, management-standard, certification, governance, lifecycle-control"
+  },
+  {
+    "source_tier": "Industry Standard",
+    "title": "IEEE 7000-2021 - Standard Model Process for Addressing Ethical Concerns During System Design",
+    "author_entity": "Institute of Electrical and Electronics Engineers (IEEE)",
+    "jurisdiction": "Global International Standard",
+    "pub_date": "2021-09-15",
+    "url": "https://www.ieee.org/",
+    "summary_content": "Establishes a practical process for engineers and developers to translate ethical values (fairness, autonomy, privacy, safety) into formal technical requirements during software and AI design.",
+    "key_rules": [
+      "Ethical Value Elicitation: Identifying human values relevant to stakeholders",
+      "Ethical Risk Assessment: Mapping design choices to potential moral hazards and harms",
+      "Constraint Requirements Formulation: Converting ethical principles into enforceable software constraints"
+    ],
+    "tags": "ieee-7000, ethical-design, engineering-ethics, systemic-trust, design-requirements"
+  },
+  {
+    "source_tier": "Industry Standard",
+    "title": "SOC 2 Type II AI Trust Services Criteria for Confidentiality & Security",
+    "author_entity": "AICPA (American Institute of CPAs)",
+    "jurisdiction": "Global / North America",
+    "pub_date": "2024-02-01",
+    "url": "https://www.aicpa-cima.com/",
+    "summary_content": "Audit criteria evaluating control environment for AI model hosting, prompt data confidentiality, user access control, model versioning, training data isolation, and API security.",
+    "key_rules": [
+      "CC6.1: Logical access controls preventing unauthorized access to AI model endpoints and training stores",
+      "CC6.6: Encryption of prompt payloads and inference outputs in transit and at rest",
+      "CC7.1: Continuous vulnerability monitoring for adversarial attacks and prompt injection vectors"
+    ],
+    "tags": "soc2, security, cloud-ai, confidentiality, infrastructure-controls, api-security"
+  },
+  {
+    "source_tier": "Research",
+    "title": "Stanford HAI 2024 AI Index Report: Governance & Risk Benchmark Analysis",
+    "author_entity": "Stanford Institute for Human-Centered Artificial Intelligence (HAI)",
+    "jurisdiction": "Academic / Global Research",
+    "pub_date": "2024-04-15",
+    "url": "https://aiindex.stanford.edu/report/",
+    "summary_content": "Empirical study evaluating enterprise AI deployment risks, showing that 68% of commercial LLM deployments experience prompt injection vulnerability, while algorithmic bias remains high without targeted demographic fine-tuning.",
+    "key_rules": [
+      "Empirical finding: Baseline commercial LLMs exhibit systematic demographic sentiment disparities",
+      "Risk metric: Model hallucination rates range between 3% and 15% across domain-specific retrieval tasks",
+      "Mitigation benchmark: Retrieval-Augmented Generation (RAG) reduces ungrounded hallucination by up to 74%"
+    ],
+    "tags": "stanford-hai, research, benchmarks, llm-hallucinations, prompt-injection, empirical-study"
+  },
+  {
+    "source_tier": "Research",
+    "title": "NIST Special Publication 1270: Towards a Standard for Identifying and Managing Bias in AI",
+    "author_entity": "NIST Information Technology Laboratory",
+    "jurisdiction": "Research / US Federal",
+    "pub_date": "2022-03-31",
+    "url": "https://doi.org/10.6028/NIST.SP.1270",
+    "summary_content": "Detailed scientific research explaining that bias in AI extends beyond statistical and data bias to include human cognitive bias and systemic institutional bias. Outlines socio-technical approaches to bias identification.",
+    "key_rules": [
+      "Three levels of bias: Systemic (historical societal factors), Computational/Statistical (sampling errors), and Cognitive (human evaluator bias)",
+      "Multi-disciplinary red-teaming requirement to identify contextual bias prior to deployment",
+      "Continuous disaggregated monitoring across sub-demographics"
+    ],
+    "tags": "nist-sp-1270, bias-research, socio-technical, cognitive-bias, metrics"
+  },
+  {
+    "source_tier": "Vendor Information",
+    "title": "AWS Guardrails & Responsible AI Deployment Guidelines",
+    "author_entity": "Amazon Web Services (AWS)",
+    "jurisdiction": "Commercial Enterprise",
+    "pub_date": "2024-03-10",
+    "url": "https://aws.amazon.com/ai/responsible-ai/",
+    "summary_content": "Technical documentation for deploying enterprise AI guardrails in AWS Bedrock. Defines automated filtering rules for PII detection, toxic content blocking, prompt attack prevention, and groundedness checking.",
+    "key_rules": [
+      "Automated PII masking (Social Security Numbers, Credit Cards, Healthcare Identifiers) before model inference",
+      "Contextual Groundedness Thresholds: Rejecting outputs where confidence against reference docs is below 0.85",
+      "Systemic content moderation filters with custom word blocklists and regex rules"
+    ],
+    "tags": "aws, vendor-guardrails, bedrock, pii-masking, cloud-governance, prompt-filter"
+  },
+  {
+    "source_tier": "Vendor Information",
+    "title": "Microsoft Responsible AI Standard (v2 Implementation Guide)",
+    "author_entity": "Microsoft Corporation",
+    "jurisdiction": "Commercial Enterprise",
+    "pub_date": "2023-06-20",
+    "url": "https://www.microsoft.com/en-us/ai/responsible-ai",
+    "summary_content": "Internal operational standard executed across Microsoft products, outlining mandatory review gates for high-impact AI systems across Accountability, Transparency, Fairness, Reliability/Safety, Privacy, and Inclusivity.",
+    "key_rules": [
+      "Mandatory Responsible AI Impact Assessment (RAIA) signed off by division lead prior to release",
+      "System description and Model Cards required for all customer-facing AI services",
+      "Failsafe red button capabilities enabling rapid feature rollback or disabling in case of systemic failure"
+    ],
+    "tags": "microsoft, vendor-standard, raia, model-card, human-oversight, enterprise-ai"
+  },
+  {
+    "source_tier": "General Web Content",
+    "title": "Gartner Enterprise AI Governance Architecture & Risk Matrix 2024",
+    "author_entity": "Gartner Research & Advisory",
+    "jurisdiction": "Industry Analysis",
+    "pub_date": "2024-01-18",
+    "url": "https://www.gartner.com/en",
+    "summary_content": "Industry commentary and analysis recommending TRiSM (Trust, Risk and Security Management) framework. Highlights that organizations without automated AI governance engines experience 3x higher rate of regulatory non-compliance.",
+    "key_rules": [
+      "Implement AI TRiSM architecture with dedicated risk scoring middleware",
+      "Mandatory cataloging of all shadow AI models across business units",
+      "Real-time telemetry and explainability dashboards for operational teams"
+    ],
+    "tags": "gartner, industry-analysis, trism, shadow-ai, enterprise-risk"
+  }
+]

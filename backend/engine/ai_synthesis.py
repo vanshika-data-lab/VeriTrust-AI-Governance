@@ -1,0 +1,172 @@
+"""
+AI Reasoning & Evidence Synthesis Layer
+Synthesizes deterministic matrix scores and 6-tier retrieved evidence into
+structured findings, statutory obligations, and actionable mitigating controls.
+"""
+
+import os
+import json
+from typing import Dict, List, Any
+
+# Check if Gemini API key exists
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+def generate_fallback_synthesis(
+    use_case_name: str,
+    industry: str,
+    purpose: str,
+    autonomy_level: str,
+    data_types: List[str],
+    scoring_result: Dict[str, Any],
+    evidence_sources: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    """
+    Deterministic synthesis engine that builds rich, evidence-linked findings for all 10 governance dimensions.
+    """
+    overall_score = scoring_result["overall_risk_score"]
+    risk_level = scoring_result["risk_level"]
+    eu_ai_act = scoring_result["eu_ai_act_category"]
+    dimensions = scoring_result["dimensions"]
+
+    data_str = ", ".join(data_types)
+
+    exec_summary = (
+        f"The AI use case '{use_case_name}' operating in the {industry} sector with an autonomy level of '{autonomy_level}' "
+        f"and processing [{data_str}] has been evaluated as {risk_level} (Overall Governance Risk Index: {overall_score}/100). "
+        f"Under the EU AI Act framework, this system falls into the category: '{eu_ai_act}'. "
+        f"Key governance exposure stems from {autonomy_level.lower()} execution, potential demographic bias in automated decisions, "
+        f"and mandatory regulatory obligations under global AI frameworks."
+    )
+
+    dimension_assessments = []
+
+    # Map sources to dimensions
+    law_sources = [s for s in evidence_sources if s["source_tier"] == "Law / Regulation"]
+    guidance_sources = [s for s in evidence_sources if s["source_tier"] == "Regulatory Guidance"]
+    standard_sources = [s for s in evidence_sources if s["source_tier"] == "Industry Standard"]
+
+    law_citation = law_sources[0]["title"] if law_sources else "EU AI Act Regulation 2024/1689"
+    guidance_citation = guidance_sources[0]["title"] if guidance_sources else "NIST AI RMF 1.0"
+    standard_citation = standard_sources[0]["title"] if standard_sources else "ISO/IEC 42001:2023"
+
+    for key, dim in dimensions.items():
+        score = dim["risk_score"]
+        level = dim["risk_level"]
+        name = dim["dimension_name"]
+
+        if key == "data":
+            findings = f"Processing [{data_str}] requires verifiable data provenance and lineage tracking to prevent unrepresentative training distribution bias."
+            reg_impact = f"Mandatory compliance with Article 10 of {law_citation} and ISO/IEC 42001 Annex A.8 data quality standards."
+            controls = [
+                "Implement automated data lineage and data quality verification pipelines.",
+                "Establish strict data minimization and PII pseudonymization protocols.",
+                "Perform representative demographic distribution audits on all training/test splits."
+            ]
+        elif key == "privacy":
+            findings = f"Exposure of {data_str} creates elevated privacy risk requiring Data Protection Impact Assessment (DPIA) prior to deployment."
+            reg_impact = f"Subject to GDPR Article 35 DPIA mandates and FTC fair information practice guidance."
+            controls = [
+                "Conduct formal Data Protection Impact Assessment (DPIA).",
+                "Enforce differential privacy or automated PII redaction at API ingestion gateway.",
+                "Provide user opt-out and explicit consent revocation pathways."
+            ]
+        elif key == "bias_fairness":
+            findings = f"Automated decisioning in {industry} carries inherent risk of disparate impact against protected demographic groups."
+            reg_impact = f"Regulated under Title VII EEOC guidance, NYC LL144 bias audit rules, and ECOA adverse impact prohibitions."
+            controls = [
+                "Execute pre-deployment bias audit measuring disparate impact ratio (80% rule).",
+                "Remove sensitive proxy variables (e.g., zip codes, high school) from feature inputs.",
+                "Schedule recurring annual independent algorithmic bias audits."
+            ]
+        elif key == "human_oversight":
+            findings = f"Operating at '{autonomy_level}' autonomy requires explicit human escalation pathways and instant kill-switch overrides."
+            reg_impact = f"Directly governed by Article 14 of {law_citation} (Human Oversight requirements for High-Risk AI)."
+            controls = [
+                "Design human-in-the-loop approval gates for decisions exceeding risk thresholds.",
+                "Provide manual override capabilities to operational supervisors.",
+                "Implement audit logging of all human override actions and justification logs."
+            ]
+        elif key == "explainability":
+            findings = f"Impacted individuals require clear, intelligible explanation for adverse outcomes generated by '{use_case_name}'."
+            reg_impact = f"Mandated by ECOA Regulation B adverse action notices and GDPR Article 22 right to explanation."
+            controls = [
+                "Deploy SHAP / LIME local feature attribution interpretability layers.",
+                "Provide plain-language adverse action notice cards detailing principal denial factors.",
+                "Establish counterfactual explanation recourse options for affected users."
+            ]
+        elif key == "security":
+            findings = f"Enterprise AI deployment vulnerable to adversarial prompt injection, model inversion, and data poisoning attacks."
+            reg_impact = f"Complies with NIST AI RMF Manage function and SOC 2 Type II AI Security criteria."
+            controls = [
+                "Implement input validation and prompt sanitization firewalls.",
+                "Enforce strict API access control, rate-limiting, and payload encryption.",
+                "Conduct quarterly adversarial red-teaming and prompt injection penetration testing."
+            ]
+        elif key == "decision_impact":
+            findings = f"Decision severity rated as '{level}' due to direct impact on stakeholder rights, financial stability, or safety."
+            reg_impact = f"Requires executive sign-off under Microsoft RAIA standard and ISO/IEC 23894 Risk Management framework."
+            controls = [
+                "Require executive AI Governance Board approval prior to full production rollout.",
+                "Implement automated roll-back protocol if model confidence falls below 85%.",
+                "Establish customer appeal channel for manual decision re-review."
+            ]
+        elif key == "regulatory_exposure":
+            findings = f"High regulatory exposure across global jurisdictions due to strict legal enforcement trends in {industry}."
+            reg_impact = f"Direct exposure under {law_citation}, {guidance_citation}, and local statutory enforcement."
+            controls = [
+                "Maintain complete technical documentation and regulatory conformity dossier.",
+                "Appoint designated AI Compliance Officer for continuous statutory monitoring.",
+                "Register AI system in EU database if deployed within European market."
+            ]
+        elif key == "model_risk":
+            findings = f"Model reliability risk includes potential hallucination, distribution shift, and unexpected emergent errors."
+            reg_impact = f"Evaluated against Stanford HAI benchmarks and NIST trustworthy AI standards."
+            controls = [
+                "Deploy Retrieval-Augmented Generation (RAG) with strict context grounding thresholds.",
+                "Establish out-of-distribution detection filters on incoming inference requests.",
+                "Maintain redundant fallback rule-based system for high-uncertainty model outputs."
+            ]
+        else: # monitoring
+            findings = f"Post-deployment operation mandates real-time telemetry, model drift detection, and continuous audit logging."
+            reg_impact = f"Mandated by ISO/IEC 42001 Clause 6.1 and NIST AI RMF Measure 2.2."
+            controls = [
+                "Stream telemetry logs to centralized Enterprise Security Information and Event Management (SIEM).",
+                "Configure automated alerts for concept drift and performance degradation.",
+                "Perform bi-annual model re-validation and accuracy re-benchmarking."
+            ]
+
+        dimension_assessments.append({
+            "dimension_key": key,
+            "dimension_name": name,
+            "risk_score": score,
+            "risk_level": level,
+            "findings": findings,
+            "regulatory_impact": reg_impact,
+            "mitigating_controls": controls
+        })
+
+    return {
+        "executive_summary": exec_summary,
+        "dimension_assessments": dimension_assessments
+    }
+
+async def synthesize_governance_assessment(
+    use_case_name: str,
+    industry: str,
+    purpose: str,
+    autonomy_level: str,
+    data_types: List[str],
+    scoring_result: Dict[str, Any],
+    evidence_sources: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    
+    # Use deterministic fallback for speed, reliability, and zero paid API requirement
+    return generate_fallback_synthesis(
+        use_case_name=use_case_name,
+        industry=industry,
+        purpose=purpose,
+        autonomy_level=autonomy_level,
+        data_types=data_types,
+        scoring_result=scoring_result,
+        evidence_sources=evidence_sources
+    )

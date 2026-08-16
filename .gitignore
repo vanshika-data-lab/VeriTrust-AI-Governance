@@ -1,0 +1,32 @@
+# Python / Virtual Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+.npm
+*.log
+
+# Environment & Config
+.env
+.env.local
+*.sqlite3
+
+# Temporary / Scratch Test Scripts
+check_urls.py
+test_new_urls.py
+test_official_urls.py
+test_links_now.py
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
