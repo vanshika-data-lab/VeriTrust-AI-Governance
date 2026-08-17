@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Search, ExternalLink } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function KnowledgeExplorerView() {
   const [sources, setSources] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,7 +14,7 @@ export default function KnowledgeExplorerView() {
 
   const fetchSources = async () => {
     try {
-      let url = `/api/sources?query=${encodeURIComponent(searchQuery)}`;
+      let url = `${API_BASE}/api/sources?query=${encodeURIComponent(searchQuery)}`;
       if (selectedTier) url += `&source_tier=${encodeURIComponent(selectedTier)}`;
       const res = await fetch(url);
       const data = await res.json();

@@ -5,6 +5,8 @@ import AssessmentForm from './components/AssessmentForm';
 import AssessmentDetailView from './components/AssessmentDetailView';
 import KnowledgeExplorerView from './components/KnowledgeExplorerView';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [useCases, setUseCases] = useState([]);
@@ -20,8 +22,8 @@ export default function App() {
     try {
       setLoading(true);
       const [casesRes, analyticsRes] = await Promise.all([
-        fetch('/api/use-cases'),
-        fetch('/api/analytics')
+        fetch(`${API_BASE}/api/use-cases`),
+        fetch(`${API_BASE}/api/analytics`)
       ]);
       const casesData = await casesRes.json();
       const analyticsData = await analyticsRes.json();
@@ -37,7 +39,7 @@ export default function App() {
   const handleSelectCase = async (assessmentId) => {
     try {
       setLoading(true);
-      const res = await fetch(`/api/assessments/${assessmentId}`);
+      const res = await fetch(`${API_BASE}/api/assessments/${assessmentId}`);
       const data = await res.json();
       setSelectedAssessment(data);
       setActiveTab('detail');
@@ -50,7 +52,7 @@ export default function App() {
 
   const handleCreateAssessment = async (inputData) => {
     try {
-      const res = await fetch('/api/assess', {
+      const res = await fetch(`${API_BASE}/api/assess`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inputData)
@@ -70,7 +72,7 @@ export default function App() {
 
     try {
       setLoading(true);
-      const res = await fetch(`/api/use-cases/${useCaseId}`, {
+      const res = await fetch(`${API_BASE}/api/use-cases/${useCaseId}`, {
         method: 'DELETE'
       });
       if (!res.ok) {
@@ -91,7 +93,7 @@ export default function App() {
 
   const handleExportReport = async (assessmentId) => {
     try {
-      const res = await fetch(`/api/export-report/${assessmentId}`);
+      const res = await fetch(`${API_BASE}/api/export-report/${assessmentId}`);
       const data = await res.json();
       const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
         JSON.stringify(data, null, 2)
