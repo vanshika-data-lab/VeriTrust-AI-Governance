@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeriTrust AI — Official Documentation & Submission Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #0f172a;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #34d399;
+      --accent-indigo: #818cf8;
+      --accent-amber: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding: 50px 20px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--accent-blue);
+      color: var(--accent-blue);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .doc-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .doc-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px rgba(56, 189, 248, 0.25);
+    }
+    .card-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .tag-blue { color: var(--accent-blue); }
+    .tag-emerald { color: var(--accent-emerald); }
+    .tag-indigo { color: var(--accent-indigo); }
+    .tag-amber { color: var(--accent-amber); }
+    .doc-card h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .doc-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .action-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .info-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .info-box h3 {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      font-size: 0.9rem;
+    }
+    .info-item strong {
+      display: block;
+      color: var(--accent-blue);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Official Submission Package</span>
+      <h1>VeriTrust AI Documentation Hub</h1>
+      <p class="subtitle">Complete technical documentation, architecture diagrams, database schemas, and live deployment links for the Modus Enterprise AI Build Challenge.</p>
+    </header>
+
+    <div class="grid">
+      <!-- Item 1: Live Application -->
+      <a href="DEPLOYMENT_GUIDE.md" class="doc-card">
+        <div>
+          <span class="card-tag tag-blue">Item 1 • Live URL & Deployment</span>
+          <h2>Live Application & Deployment Guide</h2>
+          <p>Instant live application links, Render/Vercel configuration, Docker setup, and local launcher instructions.</p>
+        </div>
+        <div class="action-link">View Deployment Guide & URLs &rarr;</div>
+      </a>
+
+      <!-- Item 2: Architecture Diagram -->
+      <a href="architecture_diagram.html" class="doc-card">
+        <div>
+          <span class="card-tag tag-indigo">Item 2 • Visual System Design</span>
+          <h2>Architecture Diagram & 5-Layer Model</h2>
+          <p>Interactive 5-Layer system architecture diagram, sequence flows for "Surprise Record" tests, and component breakdown.</p>
+        </div>
+        <div class="action-link">View Architecture Diagram (HTML / SVG) &rarr;</div>
+      </a>
+
+      <!-- Item 3: Technical Documentation -->
+      <a href="technical_documentation.html" class="doc-card">
+        <div>
+          <span class="card-tag tag-emerald">Item 3 • Full Technical Dossier</span>
+          <h2>Technical Documentation</h2>
+          <p>Comprehensive technical specification: 10-dimension risk scoring matrix, 6-tier legal evidence taxonomy, and REST APIs.</p>
+        </div>
+        <div class="action-link">View Technical Documentation &rarr;</div>
+      </a>
+
+      <!-- Item 4: Database / Data Model -->
+      <a href="database_data_model.html" class="doc-card">
+        <div>
+          <span class="card-tag tag-amber">Item 4 • Relational ER Model</span>
+          <h2>Database & Data Model Schema</h2>
+          <p>Entity-Relationship (ER) diagram, 3NF normalized tables, column constraints, JSON schemas, and indexing strategy.</p>
+        </div>
+        <div class="action-link">View ER Model & Schemas &rarr;</div>
+      </a>
+    </div>
+
+    <div class="info-box">
+      <h3>Submission Metadata & Verification</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <strong>Candidate Name</strong>
+          <span>Vanshika Aggarwal</span>
+        </div>
+        <div class="info-item">
+          <strong>Assignment</strong>
+          <span>Assignment 7 — AI Governance & Risk</span>
+        </div>
+        <div class="info-item">
+          <strong>Target Domains</strong>
+          <span>BFSI, Healthcare, HR, Aviation</span>
+        </div>
+        <div class="info-item">
+          <strong>GitHub Repository</strong>
+          <span>vanshika-data-lab/VeriTrust-AI-Governance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

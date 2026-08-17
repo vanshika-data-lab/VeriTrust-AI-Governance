@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeriTrust AI — Database Schema & ER Data Model</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #0f172a;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #34d399;
+      --accent-purple: #c084fc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 24px;
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid var(--accent-emerald);
+      color: var(--accent-emerald);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .subtitle { color: var(--text-secondary); font-size: 1rem; }
+    .print-btn {
+      background: var(--accent-emerald);
+      color: #04121d;
+      font-weight: 600;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .print-btn:hover { background: #6ee7b7; transform: translateY(-1px); }
+    .meta-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 24px;
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+    }
+    .meta-item strong {
+      color: var(--accent-emerald);
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 36px 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 22px;
+      background: var(--accent-emerald);
+      border-radius: 2px;
+    }
+    .diagram-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      overflow-x: auto;
+    }
+    .table-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .table-header {
+      background: var(--bg-card);
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .table-header h3 {
+      font-size: 1.1rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-blue);
+    }
+    .table-header span {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.05);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    th {
+      background: rgba(15, 23, 42, 0.6);
+      padding: 12px 20px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    .col-name { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #f8fafc; }
+    .col-type { font-family: 'JetBrains Mono', monospace; color: var(--accent-purple); font-size: 0.85rem; }
+    .col-key {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .pk { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #ef4444; }
+    .fk { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid #0284c7; }
+    @media print {
+      body { background: #ffffff; color: #000000; padding: 0; }
+      .diagram-card, .meta-card, .table-container { background: #ffffff; border: 1px solid #cccccc; box-shadow: none; color: #000; }
+      .print-btn { display: none; }
+      h1 { -webkit-text-fill-color: #000000; color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <span class="badge">Database Architecture & Schema</span>
+        <h1>VeriTrust AI Data Model & ER Diagram</h1>
+        <p class="subtitle">Normalized Relational Schema for Enterprise AI Governance (SQLite3 / PostgreSQL Ready)</p>
+      </div>
+      <div>
+        <button class="print-btn" onclick="window.print()">Print / Export PDF</button>
+      </div>
+    </header>
+
+    <div class="meta-card">
+      <div class="meta-item">
+        <strong>Engine</strong>
+        <span>SQLite 3 (ACID Relational)</span>
+      </div>
+      <div class="meta-item">
+        <strong>Database File</strong>
+        <span>backend/database/governance_app.db</span>
+      </div>
+      <div class="meta-item">
+        <strong>Normalization</strong>
+        <span>3NF (Third Normal Form)</span>
+      </div>
+      <div class="meta-item">
+        <strong>Cascading Rule</strong>
+        <span>ON DELETE CASCADE Enabled</span>
+      </div>
+    </div>
+
+    <h2 class="section-title">1. Entity-Relationship (ER) Model</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+erDiagram
+    USE_CASES ||--o{ ASSESSMENTS : "evaluated by"
+    ASSESSMENTS ||--|{ DIMENSION_ASSESSMENTS : "contains 10 dimensions"
+    ASSESSMENTS ||--|{ EVIDENCE_SOURCES : "cites 6-tier evidence"
+    KNOWLEDGE_BASE ||..o{ EVIDENCE_SOURCES : "seeds reference citations"
+
+    USE_CASES {
+        INTEGER id PK "Auto-increment primary key"
+        TEXT name "Name of AI System"
+        TEXT industry "BFSI, Healthcare, HR, Aviation"
+        TEXT purpose "Operational description"
+        TEXT autonomy_level "Autonomous / Human-in-the-Loop"
+        TEXT data_types "JSON Array of data categories"
+        INTEGER affected_population "Number of impacted individuals"
+        TEXT impact_tier "Low / Medium / High / Critical"
+        BOOLEAN is_preseeded "Flag for default vs custom"
+        TIMESTAMP created_at "Timestamp of ingestion"
+    }
+
+    ASSESSMENTS {
+        INTEGER id PK "Auto-increment primary key"
+        INTEGER use_case_id FK "References USE_CASES(id)"
+        REAL overall_risk_score "Composite score (0.0 - 100.0)"
+        TEXT risk_level "Low / Moderate / High / Critical Risk"
+        TEXT eu_ai_act_category "Unacceptable / High / Limited / Minimal"
+        TEXT executive_summary "Synthesized audit conclusion"
+        TIMESTAMP created_at "Assessment timestamp"
+    }
+
+    DIMENSION_ASSESSMENTS {
+        INTEGER id PK "Auto-increment primary key"
+        INTEGER assessment_id FK "References ASSESSMENTS(id) ON DELETE CASCADE"
+        TEXT dimension_key "data_gov, privacy, bias_fairness, etc."
+        TEXT dimension_name "Human readable dimension title"
+        REAL risk_score "Dimension risk score (0.0 - 100.0)"
+        TEXT risk_level "Low / Moderate / High / Critical"
+        TEXT findings "Detailed statutory & operational findings"
+        TEXT regulatory_impact "Applicable legal liability"
+        TEXT mitigating_controls "JSON Array of remediation actions"
+    }
+
+    EVIDENCE_SOURCES {
+        INTEGER id PK "Auto-increment primary key"
+        INTEGER assessment_id FK "References ASSESSMENTS(id) ON DELETE CASCADE"
+        TEXT dimension_key "Associated dimension or general"
+        TEXT source_tier "Law / Regulatory / Standard / Research / Vendor / Web"
+        TEXT title "Title of legal statute or standard"
+        TEXT author_entity "Statutory body (EU, FTC, NIST, etc.)"
+        TEXT citation_text "Specific article, clause or section"
+        TEXT url "Official statutory authority URL"
+        TEXT jurisdiction "EU, US-Federal, US-NY, Global"
+        TEXT pub_date "Publication year or date"
+        REAL reliability_score "Weight factor (0.50 - 1.00)"
+    }
+
+    KNOWLEDGE_BASE {
+        INTEGER id PK "Auto-increment primary key"
+        TEXT source_tier "Tier 1 - Tier 6 classification"
+        TEXT title "Document title"
+        TEXT author_entity "Governing authority / publisher"
+        TEXT jurisdiction "Applicable territory"
+        TEXT pub_date "Release date"
+        TEXT url "Reference link"
+        TEXT summary_content "Legal / statutory summary text"
+        TEXT key_rules "JSON Array of mandatory obligations"
+        TEXT tags "Comma-separated domain tags"
+    }
+      </div>
+    </div>
+
+    <h2 class="section-title">2. Relational Table Schemas</h2>
+
+    <!-- Table 1: use_cases -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3>TABLE: use_cases</h3>
+        <span>Primary AI System Registry</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Type</th>
+            <th>Constraint</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">id</td>
+            <td class="col-type">INTEGER</td>
+            <td><span class="col-key pk">PK</span> AUTOINCREMENT</td>
+            <td>Unique AI use case identifier</td>
+          </tr>
+          <tr>
+            <td class="col-name">name</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Name of AI system under governance review</td>
+          </tr>
+          <tr>
+            <td class="col-name">industry</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>BFSI, Healthcare, HR & Employment, Aviation & Aerospace</td>
+          </tr>
+          <tr>
+            <td class="col-name">purpose</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Operational objective and functional scope</td>
+          </tr>
+          <tr>
+            <td class="col-name">autonomy_level</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Advisory, Human-in-the-Loop, Human-on-the-Loop, Fully Autonomous</td>
+          </tr>
+          <tr>
+            <td class="col-name">data_types</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>JSON serialized array of data classifications (PII, Financial, Biometric)</td>
+          </tr>
+          <tr>
+            <td class="col-name">affected_population</td>
+            <td class="col-type">INTEGER</td>
+            <td>DEFAULT 1000</td>
+            <td>Total scale of individuals impacted</td>
+          </tr>
+          <tr>
+            <td class="col-name">impact_tier</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Low, Medium, High, Critical</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table 2: assessments -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3>TABLE: assessments</h3>
+        <span>Master Evaluation & Risk Tier Record</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Type</th>
+            <th>Constraint</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">id</td>
+            <td class="col-type">INTEGER</td>
+            <td><span class="col-key pk">PK</span> AUTOINCREMENT</td>
+            <td>Unique assessment ID</td>
+          </tr>
+          <tr>
+            <td class="col-name">use_case_id</td>
+            <td class="col-type">INTEGER</td>
+            <td><span class="col-key fk">FK</span> use_cases(id)</td>
+            <td>Associated use case reference (ON DELETE CASCADE)</td>
+          </tr>
+          <tr>
+            <td class="col-name">overall_risk_score</td>
+            <td class="col-type">REAL</td>
+            <td>NOT NULL</td>
+            <td>Composite weighted risk score (0.0 - 100.0)</td>
+          </tr>
+          <tr>
+            <td class="col-name">risk_level</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Low Risk, Moderate Risk, High Risk, Critical Risk</td>
+          </tr>
+          <tr>
+            <td class="col-name">eu_ai_act_category</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Minimal Risk, Limited Risk, High-Risk (Annex III), Unacceptable Risk</td>
+          </tr>
+          <tr>
+            <td class="col-name">executive_summary</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Executive compliance audit conclusion & statutory synthesis</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table 3: dimension_assessments -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3>TABLE: dimension_assessments</h3>
+        <span>10 Granular Governance Dimensions (1:10 Relational Breakdown)</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Type</th>
+            <th>Constraint</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">id</td>
+            <td class="col-type">INTEGER</td>
+            <td><span class="col-key pk">PK</span> AUTOINCREMENT</td>
+            <td>Unique dimension record ID</td>
+          </tr>
+          <tr>
+            <td class="col-name">assessment_id</td>
+            <td class="col-type">INTEGER</td>
+            <td><span class="col-key fk">FK</span> assessments(id)</td>
+            <td>Parent assessment reference (ON DELETE CASCADE)</td>
+          </tr>
+          <tr>
+            <td class="col-name">dimension_key</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>data_gov, privacy, bias_fairness, oversight, explainability, etc.</td>
+          </tr>
+          <tr>
+            <td class="col-name">risk_score</td>
+            <td class="col-type">REAL</td>
+            <td>NOT NULL</td>
+            <td>Normalized dimension risk score (0.0 - 100.0)</td>
+          </tr>
+          <tr>
+            <td class="col-name">findings</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Statutory and architectural audit findings</td>
+          </tr>
+          <tr>
+            <td class="col-name">mitigating_controls</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>JSON serialized array of concrete engineering controls</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table 4: evidence_sources -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3>TABLE: evidence_sources</h3>
+        <span>6-Tier Legal & Regulatory Citations</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Type</th>
+            <th>Constraint</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-name">id</td>
+            <td class="col-type">INTEGER</td>
+            <td><span class="col-key pk">PK</span> AUTOINCREMENT</td>
+            <td>Evidence citation ID</td>
+          </tr>
+          <tr>
+            <td class="col-name">assessment_id</td>
+            <td class="col-type">INTEGER</td>
+            <td><span class="col-key fk">FK</span> assessments(id)</td>
+            <td>Parent assessment ID (ON DELETE CASCADE)</td>
+          </tr>
+          <tr>
+            <td class="col-name">source_tier</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Law / Regulation, Regulatory Guidance, Industry Standard, Research, Vendor, Web</td>
+          </tr>
+          <tr>
+            <td class="col-name">title</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Canonical title (e.g. EU AI Act Regulation 2024/1689)</td>
+          </tr>
+          <tr>
+            <td class="col-name">citation_text</td>
+            <td class="col-type">TEXT</td>
+            <td>NOT NULL</td>
+            <td>Specific section, article, or recital reference</td>
+          </tr>
+          <tr>
+            <td class="col-name">url</td>
+            <td class="col-type">TEXT</td>
+            <td>DEFAULT ''</td>
+            <td>Direct URL to official statutory authority portal</td>
+          </tr>
+          <tr>
+            <td class="col-name">reliability_score</td>
+            <td class="col-type">REAL</td>
+            <td>DEFAULT 0.9</td>
+            <td>Tier credibility weight (0.50 - 1.00)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#0f172a',
+        primaryColor: '#1e293b',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#34d399',
+        lineColor: '#94a3b8'
+      }
+    });
+  </script>
+</body>
+</html>
