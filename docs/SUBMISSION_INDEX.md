@@ -11,9 +11,9 @@
 
 ### 1️⃣ Live Application URL
 ```
-https://veritrust-ai-governance.vercel.app
+https://veritrust-ai-governance.loca.lt
 ```
-*(Alternative / Local Evaluation Tunnel: Run `python run_app.py` and `npx localtunnel --port 3000` to get an instant live public URL of the React dashboard, or see `docs/DEPLOYMENT_GUIDE.md`)*
+*(Single-command launcher: Run `python run_live_demo.py` to start the FastAPI backend + React frontend + live HTTPS tunnel)*
 
 ---
 
