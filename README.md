@@ -2,8 +2,8 @@
 
 **Candidate Name**: Vanshika Aggarwal  
 **Assignment Selected**: Assignment 7 — AI Governance Research & Assessment Application  
-**Target Domain Exposure**: BFSI / Financial Services, Healthcare, HR & Employment, Aviation & Aerospace  
-**GitHub Repository**: [https://github.com/vanshika-data-lab/VeriTrust-AI-Governance](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance)  
+**Target Domain Exposure**: BFSI / Financial Services, Healthcare, HR & Employment, Aviation & Aerospace  etc. 
+
 
 ### 🌐 Live Cloud Deployment
 * **Live Frontend Application (Vercel)**: [https://veri-trust-ai-governance.vercel.app](https://veri-trust-ai-governance.vercel.app)
@@ -160,31 +160,9 @@ npm run dev
 
 ---
 
-## 🎬 Live Demonstration Script (10–15 Min Evaluator Guide)
+## 🎬 Live Demonstration Video
 
-For the live technical presentation and "Surprise Record" evaluation:
-
-1. **Step 1: Risk Analytics Overview (2 mins)**
-   - Open `http://localhost:3000`. Show the executive KPIs: Total Assessed Use Cases, High-Risk Alerts, 6-Tier Evidence Index, and Average Governance Score.
-   - Highlight the **10 Mandatory Governance Assessment Areas** card with visual progress meters.
-
-2. **Step 2: 6-Tier Knowledge Base Explorer (2 mins)**
-   - Click **`6-Tier Knowledge Base`** in the top navigation.
-   - Filter by *Law / Regulation* (e.g. EU AI Act, GDPR, NYC LL144, ECOA). Show how clicking **"Access Official Statutory Reference Document"** opens the official authority portal.
-
-3. **Step 3: Execute "Surprise Record" Live Test (5 mins)**
-   - Click **`Dynamic "Surprise Record" Test`** in the top navigation.
-   - Click one of the quick sample buttons (e.g., *Biometric AI Attendance & Mood Monitor* in Corporate Workplace) or type a completely novel evaluator AI use case.
-   - Click **`Execute Dynamic 10-Dimension Risk & Evidence Assessment`**.
-   - Watch the 4-step real-time evaluation workflow (Architecture parsing -> 10-dim matrix computation -> 6-tier retrieval -> Statutory synthesis).
-
-4. **Step 4: Detailed Audit & Evidence Review (3 mins)**
-   - Review the generated **Risk Tier** (e.g., CRITICAL / HIGH).
-   - Inspect the individual ratings across all 10 dimensions: Data Governance, Privacy, Bias/Fairness, Human Oversight, Explainability, Cybersecurity, Impact Severity, Regulatory Exposure, Model Risk, and Monitoring.
-   - Open the **6-Tier Citation Drawer** to demonstrate how statutory obligations (e.g., EU AI Act Art. 14, NYC LL144 80% Rule) support the findings.
-
-5. **Step 5: Export Compliance Report (2 mins)**
-   - Click **`Export Full Audit Report`** to download the JSON report payload for enterprise compliance archives.
+[Pitch Video](https://drive.google.com/file/d/1545afRTlRXitDCadjbxbzboI5Hb9O9Vm/view?usp=drive_link)
 
 ---
 
