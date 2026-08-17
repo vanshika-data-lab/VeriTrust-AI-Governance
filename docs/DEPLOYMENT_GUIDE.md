@@ -7,67 +7,70 @@
 
 ---
 
-## 1. Live Application Deployment Options (React + FastAPI)
+## 1. Live Application URLs
 
-### Option A: Free Production Cloud Deployment (Vercel + Render) 🌟
-This preserves the exact, pixel-perfect React interface you see on localhost (`http://localhost:3000`).
+| Component | Cloud Platform | Live Deployment URL | Status |
+|---|---|---|---|
+| **Frontend Web Application** | **Vercel** | [https://veri-trust-ai-governance.vercel.app](https://veri-trust-ai-governance.vercel.app) | 🟢 Live |
+| **Backend Governance API** | **Render** | [https://veritrust-ai-governance-1.onrender.com](https://veritrust-ai-governance-1.onrender.com) | 🟢 Live |
+| **Interactive API Docs (Swagger UI)** | **Render** | [https://veritrust-ai-governance-1.onrender.com/docs](https://veritrust-ai-governance-1.onrender.com/docs) | 🟢 Live |
+| **API Health Check Endpoint** | **Render** | [https://veritrust-ai-governance-1.onrender.com/api/health](https://veritrust-ai-governance-1.onrender.com/api/health) | 🟢 Live |
 
-1. **Frontend on Vercel (1-Click Free Hosting)**:
-   - Go to **[vercel.com](https://vercel.com)** and log in with your GitHub account.
-   - Click **"Add New..." -> "Project"** and import `vanshika-data-lab/VeriTrust-AI-Governance`.
+---
+
+## 2. Cloud Production Deployment Architecture (Vercel + Render)
+
+VeriTrust AI is architected as a decoupled, production-ready cloud system:
+* **Frontend**: React 18 + Vite single-page application deployed on the **Vercel Edge Network**.
+* **Backend**: FastAPI + SQLite 10-dimension deterministic assessment engine deployed as a Web Service on **Render**.
+
+```mermaid
+graph LR
+    User[User / Evaluator Browser] -->|HTTPS Requests| Vercel[Vercel Frontend CDN\nveri-trust-ai-governance.vercel.app]
+    Vercel -->|REST API Calls| Render[Render Backend Web Service\nFastAPI + SQLite Engine]
+    Render -->|Assessment Results & Citations| Vercel
+```
+
+---
+
+## 3. Deployment Configuration
+
+### A. Frontend on Vercel
+1. Log in to [Vercel](https://vercel.com) using your GitHub account.
+2. Import repository `vanshika-data-lab/VeriTrust-AI-Governance`.
+3. Configure Build Settings:
+   - **Framework Preset**: `Vite`
    - **Root Directory**: `frontend`
-   - **Framework Preset**: Vite
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
-   - Click **"Deploy"**.
-   - Your live frontend URL will be generated: **`https://veritrust-ai-governance.vercel.app`**
+4. Environment Variables (**Settings ➔ Environment Variables**):
+   - **Key**: `VITE_API_BASE_URL`
+   - **Value**: `https://veritrust-ai-governance-1.onrender.com`
+   - **Target**: Production, Preview, Development
 
-2. **Backend API on Render (Free Web Service)**:
-   - Go to **[render.com](https://render.com)** -> New -> Web Service.
-   - Connect repository `vanshika-data-lab/VeriTrust-AI-Governance`.
+---
+
+### B. Backend API on Render
+1. Log in to [Render](https://render.com) ➔ **"New" ➔ "Web Service"**.
+2. Connect your GitHub repository `vanshika-data-lab/VeriTrust-AI-Governance`.
+3. Configure Service Parameters:
+   - **Name**: `veritrust-ai-governance-1`
    - **Root Directory**: `backend`
-   - **Runtime**: Python 3
+   - **Environment / Runtime**: `Python 3`
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-   - Your live backend URL will be: **`https://veritrust-backend.onrender.com`**
+   - **Instance Type**: `Free`
+
+> **Render Free Tier Spin-Down Notice**: Free instances spin down after 15 minutes of inactivity. When a new request arrives, it takes ~30 seconds for the service to wake up (cold start).
 
 ---
 
-### Option B: Instant Public Live Tunnel (1-Minute Live Demo Setup)
-If presenting live or running during evaluation, expose your local React application (`localhost:3000`) and FastAPI backend directly to a live public HTTPS URL with one command using **localtunnel** or **ngrok**:
+## 4. Final Submission Form Reference Table
 
-```bash
-# Terminal 1: Start Application Launcher (Runs Backend Port 5000 + Frontend Port 3000)
-python run_app.py
-
-# Terminal 2: Expose React Port 3000 to the Web
-npx localtunnel --port 3000
-```
-This generates a live public URL (e.g. `https://veritrust-governance.loca.lt`) that displays the **exact, identical localhost React dashboard** to anyone worldwide.
-
-Or with ngrok:
-```bash
-ngrok http 3000
-```
-
----
-
-### Option C: Docker Container Deployment
-```bash
-# Build the unified container
-docker build -t veritrust-ai .
-
-# Run on port 5000 / 3000
-docker run -d -p 5000:5000 -p 3000:3000 --name veritrust veritrust-ai
-```
-
----
-
-## 2. Submission URL Reference
-
-| Field Name | Recommended Submission Content |
+| Field Name | Official Submission Content |
 |---|---|
-| **Live Application URL** | `https://veritrust-ai-governance.vercel.app` *(or your localtunnel URL)* |
+| **Live Application URL** | `https://veri-trust-ai-governance.vercel.app` |
+| **Backend API URL** | `https://veritrust-ai-governance-1.onrender.com` |
 | **GitHub Repository** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance` |
 | **Architecture Diagram** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.md` |
 | **Technical Documentation** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.md` |

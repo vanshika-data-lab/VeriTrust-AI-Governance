@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Search, ExternalLink } from 'lucide-react';
+import { BookOpen, Search, ExternalLink, RefreshCw, AlertCircle } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
 export default function KnowledgeExplorerView() {
   const [sources, setSources] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTier, setSelectedTier] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
 
   useEffect(() => {
     fetchSources();
@@ -14,13 +16,23 @@ export default function KnowledgeExplorerView() {
 
   const fetchSources = async () => {
     try {
+      setLoading(true);
+      setFetchError(null);
       let url = `${API_BASE}/api/sources?query=${encodeURIComponent(searchQuery)}`;
       if (selectedTier) url += `&source_tier=${encodeURIComponent(selectedTier)}`;
+      
       const res = await fetch(url);
+      const contentType = res.headers.get("content-type") || "";
+      if (!res.ok || !contentType.includes("application/json")) {
+        throw new Error("Unable to load knowledge base from backend. Ensure backend is running and VITE_API_BASE_URL is set in Vercel.");
+      }
       const data = await res.json();
-      setSources(data);
+      setSources(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Error fetching knowledge base:", err);
+      setFetchError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,7 +77,37 @@ export default function KnowledgeExplorerView() {
         </div>
       </div>
 
+      {/* Loading state */}
+      {loading && sources.length === 0 && (
+        <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+          <RefreshCw style={{ width: '28px', height: '28px', color: '#818cf8', animation: 'spin 1.5s linear infinite', marginBottom: '12px' }} />
+          <div>Loading 6-tier regulatory knowledge base...</div>
+        </div>
+      )}
+
+      {/* Error state */}
+      {fetchError && sources.length === 0 && !loading && (
+        <div className="veritrust-card" style={{ padding: '30px', textAlign: 'center', border: '1px solid rgba(239, 68, 68, 0.4)', background: 'rgba(239, 68, 68, 0.1)' }}>
+          <AlertCircle style={{ width: '36px', height: '36px', color: '#f87171', margin: '0 auto 12px' }} />
+          <h4 style={{ color: '#fff', marginBottom: '6px' }}>Unable to retrieve knowledge base</h4>
+          <p style={{ color: '#fca5a5', fontSize: '0.9rem', maxWidth: '600px', margin: '0 auto 16px' }}>{fetchError}</p>
+          <button 
+            onClick={fetchSources} 
+            className="btn btn-primary"
+            style={{ padding: '8px 18px', fontSize: '0.85rem' }}
+          >
+            Retry Fetch
+          </button>
+        </div>
+      )}
+
       {/* Grid of KB cards */}
+      {!loading && sources.length === 0 && !fetchError && (
+        <div className="veritrust-card" style={{ padding: '40px', textAlign: 'center', color: '#94a3b8' }}>
+          No knowledge base articles matched your search filter.
+        </div>
+      )}
+
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', gap: '22px' }}>
         {sources.map((item) => (
           <div key={item.id} className="veritrust-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

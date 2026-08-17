@@ -11,9 +11,12 @@
 
 ### 1️⃣ Live Application URL
 ```
-https://veritrust-ai-governance.loca.lt
+https://veri-trust-ai-governance.vercel.app
 ```
-*(Single-command launcher: Run `python run_live_demo.py` to start the FastAPI backend + React frontend + live HTTPS tunnel)*
+* **Frontend Application (Vercel)**: [https://veri-trust-ai-governance.vercel.app](https://veri-trust-ai-governance.vercel.app)
+* **Backend Governance API (Render)**: [https://veritrust-ai-governance-1.onrender.com](https://veritrust-ai-governance-1.onrender.com)
+* **Swagger API Documentation**: [https://veritrust-ai-governance-1.onrender.com/docs](https://veritrust-ai-governance-1.onrender.com/docs)
+* **API Health Check Endpoint**: [https://veritrust-ai-governance-1.onrender.com/api/health](https://veritrust-ai-governance-1.onrender.com/api/health)
 
 ---
 

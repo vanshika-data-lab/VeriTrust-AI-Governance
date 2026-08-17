@@ -1,7 +1,7 @@
 import React from 'react';
 import { ShieldCheck, LayoutDashboard, PlusCircle, BookOpen, Activity } from 'lucide-react';
 
-export default function Navbar({ activeTab, setActiveTab }) {
+export default function Navbar({ activeTab, setActiveTab, isBackendConnected = true }) {
   return (
     <header style={{ 
       background: '#0f172a', 
@@ -13,7 +13,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
-        justify: 'space-between', 
+        justifyContent: 'space-between', 
         maxWidth: '1440px', 
         margin: '0 auto', 
         padding: '14px 28px',
@@ -31,7 +31,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
             borderRadius: '10px', 
             display: 'flex', 
             alignItems: 'center', 
-            justify: 'center',
+            justifyContent: 'center',
             boxShadow: '0 4px 14px rgba(37, 99, 235, 0.35)'
           }}>
             <ShieldCheck style={{ width: '24px', height: '24px', color: '#fff' }} />
@@ -80,15 +80,15 @@ export default function Navbar({ activeTab, setActiveTab }) {
             alignItems: 'center', 
             gap: '6px', 
             fontSize: '0.78rem', 
-            background: 'rgba(16, 185, 129, 0.15)', 
+            background: isBackendConnected ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)', 
             padding: '6px 14px', 
             borderRadius: '20px', 
-            border: '1px solid rgba(16, 185, 129, 0.4)', 
-            color: '#6ee7b7',
+            border: isBackendConnected ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(239, 68, 68, 0.4)', 
+            color: isBackendConnected ? '#6ee7b7' : '#fca5a5',
             fontWeight: 600
           }}>
             <Activity style={{ width: '13px', height: '13px' }} />
-            <span>SQLite Engine Active</span>
+            <span>{isBackendConnected ? 'SQLite Engine Active' : 'Backend Disconnected'}</span>
           </div>
         </div>
 

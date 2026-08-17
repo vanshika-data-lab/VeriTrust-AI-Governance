@@ -1,7 +1,7 @@
 services:
   # Backend FastAPI Web Service
   - type: web
-    name: veritrust-backend
+    name: veritrust-ai-governance-1
     env: python
     region: oregon
     plan: free
@@ -10,16 +10,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.12
-
-  # Frontend Static Site
-  - type: web
-    name: veritrust-frontend
-    env: static
-    region: oregon
-    plan: free
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html

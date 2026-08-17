@@ -3,7 +3,13 @@
 **Candidate Name**: Vanshika Aggarwal  
 **Assignment Selected**: Assignment 7 — AI Governance Research & Assessment Application  
 **Target Domain Exposure**: BFSI / Financial Services, Healthcare, HR & Employment, Aviation & Aerospace  
-**GitHub Repository**: [https://github.com/vanshika-data-lab/VeriTrust-AI-Governance](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance)
+**GitHub Repository**: [https://github.com/vanshika-data-lab/VeriTrust-AI-Governance](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance)  
+
+### 🌐 Live Cloud Deployment
+* **Live Frontend Application (Vercel)**: [https://veri-trust-ai-governance.vercel.app](https://veri-trust-ai-governance.vercel.app)
+* **Live Backend Governance API (Render)**: [https://veritrust-ai-governance-1.onrender.com](https://veritrust-ai-governance-1.onrender.com)
+* **Swagger API Documentation**: [https://veritrust-ai-governance-1.onrender.com/docs](https://veritrust-ai-governance-1.onrender.com/docs)
+* **API Health Check**: [https://veritrust-ai-governance-1.onrender.com/api/health](https://veritrust-ai-governance-1.onrender.com/api/health)
 
 ---
 
