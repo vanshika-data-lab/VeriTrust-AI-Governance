@@ -327,5 +327,36 @@ def query_knowledge_base(query: str = "", source_tier: Optional[str] = None) -> 
             "key_rules": json.loads(r["key_rules"]) if r["key_rules"] else [],
             "tags": r["tags"]
         })
-    conn.close;
+    conn.close()
     return results
+
+def delete_use_case(use_case_id: int) -> bool:
+    """
+    Deletes a specific use case and cascades deletion to assessments,
+    dimension_assessments, and evidence_sources.
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    # 1. Fetch associated assessment IDs
+    cursor.execute("SELECT id FROM assessments WHERE use_case_id = ?", (use_case_id,))
+    assessment_rows = cursor.fetchall()
+    
+    for row in assessment_rows:
+        aid = row["id"]
+        # Delete evidence sources
+        cursor.execute("DELETE FROM evidence_sources WHERE assessment_id = ?", (aid,))
+        # Delete dimension assessments
+        cursor.execute("DELETE FROM dimension_assessments WHERE assessment_id = ?", (aid,))
+    
+    # 2. Delete assessments
+    cursor.execute("DELETE FROM assessments WHERE use_case_id = ?", (use_case_id,))
+    
+    # 3. Delete use case
+    cursor.execute("DELETE FROM use_cases WHERE id = ?", (use_case_id,))
+    deleted = cursor.rowcount > 0
+    
+    conn.commit()
+    conn.close()
+    return deleted
+

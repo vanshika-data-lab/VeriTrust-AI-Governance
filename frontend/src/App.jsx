@@ -64,6 +64,31 @@ export default function App() {
     }
   };
 
+  const handleDeleteUseCase = async (useCaseId, useCaseName) => {
+    const confirmed = window.confirm(`Are you sure you want to delete the AI use case "${useCaseName}"? All associated assessments and evidence citations will be removed.`);
+    if (!confirmed) return;
+
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/use-cases/${useCaseId}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.detail || "Failed to delete use case");
+      }
+      if (selectedAssessment?.use_case_id === useCaseId) {
+        setSelectedAssessment(null);
+        setActiveTab('dashboard');
+      }
+      await fetchData();
+    } catch (err) {
+      alert("Error deleting use case: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleExportReport = async (assessmentId) => {
     try {
       const res = await fetch(`/api/export-report/${assessmentId}`);
@@ -105,6 +130,7 @@ export default function App() {
                 analytics={analytics}
                 onSelectCase={handleSelectCase}
                 onStartNewTest={() => setActiveTab('assess')}
+                onDeleteCase={handleDeleteUseCase}
               />
             )}
 

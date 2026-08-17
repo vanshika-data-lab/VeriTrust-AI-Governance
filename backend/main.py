@@ -11,7 +11,8 @@ from pydantic import BaseModel, Field
 
 from database.db_manager import (
     init_db, save_use_case, save_full_assessment,
-    get_all_use_cases, get_assessment_details, query_knowledge_base
+    get_all_use_cases, get_assessment_details, query_knowledge_base,
+    delete_use_case
 )
 from engine.scoring_matrix import compute_deterministic_scores
 from engine.evidence_classifier import enrich_source_metadata
@@ -137,6 +138,13 @@ def health_check():
 @app.get("/api/use-cases")
 def list_use_cases():
     return get_all_use_cases()
+
+@app.delete("/api/use-cases/{use_case_id}")
+def remove_use_case(use_case_id: int):
+    success = delete_use_case(use_case_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Use case not found")
+    return {"status": "success", "message": f"Use case {use_case_id} deleted successfully"}
 
 @app.get("/api/assessments/{assessment_id}")
 def read_assessment(assessment_id: int):

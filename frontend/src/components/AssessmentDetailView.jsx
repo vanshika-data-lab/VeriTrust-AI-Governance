@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Shield, AlertTriangle, FileCheck, ExternalLink, Download, Layers, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Shield, AlertTriangle, FileCheck, ExternalLink, Download, FileJson, Layers, CheckCircle2, ChevronDown, ChevronUp, ChevronsUpDown } from 'lucide-react';
 import EvidenceDrawer from './EvidenceDrawer';
 
 export default function AssessmentDetailView({ assessment, onBack, onExportReport }) {
-  const [expandedDimension, setExpandedDimension] = useState(null);
+  // Dictionary tracking independent open/closed state for each dimension card
+  const [expandedDimensions, setExpandedDimensions] = useState({});
   const [showEvidenceDrawer, setShowEvidenceDrawer] = useState(false);
 
   if (!assessment) return null;
@@ -11,31 +12,54 @@ export default function AssessmentDetailView({ assessment, onBack, onExportRepor
   const isHighRisk = assessment.overall_risk_score >= 68.0;
 
   const toggleDimension = (key) => {
-    setExpandedDimension(expandedDimension === key ? null : key);
+    setExpandedDimensions(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+  };
+
+  const handleExpandAll = () => {
+    const allOpen = {};
+    assessment.dimensions?.forEach(dim => {
+      allOpen[dim.dimension_key] = true;
+    });
+    setExpandedDimensions(allOpen);
+  };
+
+  const handleCollapseAll = () => {
+    setExpandedDimensions({});
   };
 
   return (
-    <div style={{ maxWidth: '1400px', margin: '30px auto', padding: '0 28px' }}>
+    <div style={{ maxWidth: '1400px', margin: '24px auto', padding: '0 28px' }}>
       
-      {/* Top Controls */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <button className="btn btn-secondary" onClick={onBack} style={{ padding: '8px 14px' }}>
+      {/* Top Controls - Sleek & Theme Aligned */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
+        <button 
+          className="btn btn-secondary" 
+          onClick={onBack} 
+          style={{ padding: '9px 18px', fontSize: '0.9rem' }}
+        >
           <ArrowLeft style={{ width: '16px', height: '16px' }} />
           Back to Dashboard
         </button>
 
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
           <button 
-            className="btn btn-secondary"
+            className="btn btn-indigo"
             onClick={() => setShowEvidenceDrawer(true)}
-            style={{ background: 'rgba(99, 102, 241, 0.15)', borderColor: 'rgba(99, 102, 241, 0.4)', color: '#a5b4fc' }}
+            style={{ padding: '9px 18px', fontSize: '0.9rem' }}
           >
-            <FileCheck style={{ width: '16px', height: '16px' }} />
+            <FileCheck style={{ width: '16px', height: '16px', color: '#a5b4fc' }} />
             View 6-Tier Cited Evidence Sources ({assessment.sources?.length || 0})
           </button>
 
-          <button className="btn btn-primary" onClick={() => onExportReport(assessment.id)}>
-            <Download style={{ width: '16px', height: '16px' }} />
+          <button 
+            className="btn btn-primary" 
+            onClick={() => onExportReport(assessment.id)}
+            style={{ padding: '9px 18px', fontSize: '0.9rem' }}
+          >
+            <FileJson style={{ width: '16px', height: '16px' }} />
             Export Audit Report (JSON)
           </button>
         </div>
@@ -47,7 +71,7 @@ export default function AssessmentDetailView({ assessment, onBack, onExportRepor
           
           <div style={{ flex: 1, minWidth: '320px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <span className="badge" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#a5b4fc', border: '1px solid rgba(99, 102, 241, 0.3)' }}>
+              <span className="badge" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#c7d2fe', border: '1px solid rgba(99, 102, 241, 0.3)' }}>
                 {assessment.industry}
               </span>
               <span className={`badge ${isHighRisk ? 'badge-high' : 'badge-low'}`}>
@@ -91,33 +115,74 @@ export default function AssessmentDetailView({ assessment, onBack, onExportRepor
 
       {/* 10 Governance Dimensions Section */}
       <div style={{ marginBottom: '36px' }}>
-        <h3 style={{ fontSize: '1.3rem', color: '#fff', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Layers style={{ width: '20px', height: '20px', color: '#6366f1' }} />
-          Detailed 10-Dimension Risk Breakdown & Mitigating Controls
-        </h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+          <h3 style={{ fontSize: '1.3rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Layers style={{ width: '20px', height: '20px', color: '#818cf8' }} />
+            Detailed 10-Dimension Risk Breakdown & Mitigating Controls
+          </h3>
 
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button 
+              className="btn btn-secondary" 
+              onClick={handleExpandAll}
+              style={{ padding: '6px 12px', fontSize: '0.78rem' }}
+            >
+              Expand All
+            </button>
+            <button 
+              className="btn btn-secondary" 
+              onClick={handleCollapseAll}
+              style={{ padding: '6px 12px', fontSize: '0.78rem' }}
+            >
+              Collapse All
+            </button>
+          </div>
+        </div>
+
+        {/* Multi-card Grid allowing simultaneous side-by-side inspection */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(620px, 1fr))', gap: '20px' }}>
           {assessment.dimensions?.map((dim) => {
             const isDimHigh = dim.risk_score >= 68.0;
-            const isExpanded = expandedDimension === dim.dimension_key;
+            const isExpanded = !!expandedDimensions[dim.dimension_key];
 
             return (
-              <div key={dim.dimension_key} className="glass-card" style={{ padding: '20px', borderLeft: `4px solid ${isDimHigh ? '#f43f5e' : '#10b981'}` }}>
+              <div 
+                key={dim.dimension_key} 
+                className="glass-card" 
+                style={{ 
+                  padding: '20px', 
+                  borderLeft: `4px solid ${isDimHigh ? '#f43f5e' : '#10b981'}`,
+                  transition: 'all 0.2s ease'
+                }}
+              >
                 
-                {/* Header */}
+                {/* Header with Clickable Dropdown Trigger */}
                 <div 
-                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', userSelect: 'none' }}
                   onClick={() => toggleDimension(dim.dimension_key)}
+                  title="Click to toggle mandatory mitigating controls"
                 >
                   <div>
                     <span style={{ fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>GOVERNANCE AREA</span>
-                    <h4 style={{ fontSize: '1.1rem', color: '#fff' }}>{dim.dimension_name}</h4>
+                    <h4 style={{ fontSize: '1.1rem', color: '#fff', marginTop: '2px' }}>{dim.dimension_name}</h4>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <span className={`badge ${isDimHigh ? 'badge-high' : 'badge-low'}`}>
                       Score: {dim.risk_score}/100
                     </span>
-                    {isExpanded ? <ChevronUp style={{ width: '18px', height: '18px', color: '#94a3b8' }} /> : <ChevronDown style={{ width: '18px', height: '18px', color: '#94a3b8' }} />}
+                    <div style={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center',
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '6px',
+                      background: isExpanded ? 'rgba(99, 102, 241, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: isExpanded ? '#a5b4fc' : '#94a3b8'
+                    }}>
+                      {isExpanded ? <ChevronUp style={{ width: '16px', height: '16px' }} /> : <ChevronDown style={{ width: '16px', height: '16px' }} />}
+                    </div>
                   </div>
                 </div>
 
@@ -133,8 +198,8 @@ export default function AssessmentDetailView({ assessment, onBack, onExportRepor
                 </div>
 
                 {/* Empirical Findings */}
-                <p style={{ color: '#cbd5e1', fontSize: '0.88rem', marginBottom: '12px' }}>
-                  <strong>Findings:</strong> {dim.findings}
+                <p style={{ color: '#cbd5e1', fontSize: '0.88rem', marginBottom: '12px', lineHeight: '1.5' }}>
+                  <strong style={{ color: '#f8fafc' }}>Findings:</strong> {dim.findings}
                 </p>
 
                 {/* Statutory Impact */}
@@ -143,9 +208,9 @@ export default function AssessmentDetailView({ assessment, onBack, onExportRepor
                   <span style={{ fontSize: '0.82rem', color: '#94a3b8' }}>{dim.regulatory_impact}</span>
                 </div>
 
-                {/* Mitigating Controls Checklist */}
+                {/* Mitigating Controls Checklist - Independently togglable */}
                 {isExpanded && (
-                  <div style={{ marginTop: '14px', paddingTop: '14px', borderTop: '1px dashed rgba(255, 255, 255, 0.1)' }}>
+                  <div style={{ marginTop: '14px', paddingTop: '14px', borderTop: '1px dashed rgba(255, 255, 255, 0.12)', animation: 'fadeIn 0.2s ease-in' }}>
                     <span style={{ fontSize: '0.8rem', color: '#6ee7b7', fontWeight: 600, display: 'block', marginBottom: '8px' }}>
                       ✓ MANDATORY ACTIONABLE MITIGATING CONTROLS:
                     </span>
@@ -177,3 +242,4 @@ export default function AssessmentDetailView({ assessment, onBack, onExportRepor
     </div>
   );
 }
+
