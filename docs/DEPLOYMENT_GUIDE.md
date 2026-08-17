@@ -7,52 +7,52 @@
 
 ---
 
-## 1. Primary Live Application Method: Streamlit Community Cloud (Recommended 🌟)
+## 1. Live Application Deployment Options (React + FastAPI)
 
-Streamlit Community Cloud provides an **instant, 100% free, 1-click public HTTPS URL** with zero configuration.
+### Option A: Free Production Cloud Deployment (Vercel + Render) 🌟
+This preserves the exact, pixel-perfect React interface you see on localhost (`http://localhost:3000`).
 
-### 🚀 60-Second Deployment Steps:
-1. Go to **[share.streamlit.io](https://share.streamlit.io)** and log in with your GitHub account.
-2. Click **"New app"**.
-3. Select your repository:
-   - **Repository**: `vanshika-data-lab/VeriTrust-AI-Governance`
-   - **Branch**: `main`
-   - **Main file path**: `app.py`
-4. Click **"Deploy!"**
-5. Streamlit will install dependencies from `requirements.txt` and launch your live application at:
-   👉 **`https://veritrust-ai-governance.streamlit.app`** (or custom sub-domain of your choice)
+1. **Frontend on Vercel (1-Click Free Hosting)**:
+   - Go to **[vercel.com](https://vercel.com)** and log in with your GitHub account.
+   - Click **"Add New..." -> "Project"** and import `vanshika-data-lab/VeriTrust-AI-Governance`.
+   - **Root Directory**: `frontend`
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - Click **"Deploy"**.
+   - Your live frontend URL will be generated: **`https://veritrust-ai-governance.vercel.app`**
 
----
-
-## 2. Alternative Live Deployment Options
-
-### Option B: Free Cloud Deployment on Render / Vercel
-1. **Backend (Render Free Web Service)**:
-   - Go to [render.com](https://render.com) -> New -> Web Service.
-   - Connect your GitHub repo: `vanshika-data-lab/VeriTrust-AI-Governance`.
+2. **Backend API on Render (Free Web Service)**:
+   - Go to **[render.com](https://render.com)** -> New -> Web Service.
+   - Connect repository `vanshika-data-lab/VeriTrust-AI-Governance`.
    - **Root Directory**: `backend`
+   - **Runtime**: Python 3
+   - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-2. **Frontend (Vercel)**:
-   - Go to [vercel.com](https://vercel.com) -> Import `vanshika-data-lab/VeriTrust-AI-Governance`.
-   - **Root Directory**: `frontend` -> Output: `dist`.
+   - Your live backend URL will be: **`https://veritrust-backend.onrender.com`**
 
 ---
 
-### Option C: Instant Public Tunnel URL (1-Minute Live Demo Setup)
-If running locally during evaluation, expose the local server to a live public HTTPS URL with one command using **ngrok** or **localtunnel**:
+### Option B: Instant Public Live Tunnel (1-Minute Live Demo Setup)
+If presenting live or running during evaluation, expose your local React application (`localhost:3000`) and FastAPI backend directly to a live public HTTPS URL with one command using **localtunnel** or **ngrok**:
 
 ```bash
-# Terminal 1: Start Streamlit App
-streamlit run app.py
+# Terminal 1: Start Application Launcher (Runs Backend Port 5000 + Frontend Port 3000)
+python run_app.py
 
-# Terminal 2: Expose Port 8501 to the Web
-npx localtunnel --port 8501
+# Terminal 2: Expose React Port 3000 to the Web
+npx localtunnel --port 3000
 ```
-This generates a live public URL (e.g. `https://veritrust-governance.loca.lt`) accessible worldwide.
+This generates a live public URL (e.g. `https://veritrust-governance.loca.lt`) that displays the **exact, identical localhost React dashboard** to anyone worldwide.
+
+Or with ngrok:
+```bash
+ngrok http 3000
+```
 
 ---
 
-### Option D: Docker Container Deployment
+### Option C: Docker Container Deployment
 ```bash
 # Build the unified container
 docker build -t veritrust-ai .
@@ -63,11 +63,11 @@ docker run -d -p 5000:5000 -p 3000:3000 --name veritrust veritrust-ai
 
 ---
 
-## 3. Submission URL Template
+## 2. Submission URL Reference
 
 | Field Name | Recommended Submission Content |
 |---|---|
-| **Live Application URL** | `https://veritrust-ai-governance.streamlit.app` |
+| **Live Application URL** | `https://veritrust-ai-governance.vercel.app` *(or your localtunnel URL)* |
 | **GitHub Repository** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance` |
 | **Architecture Diagram** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.md` |
 | **Technical Documentation** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.md` |

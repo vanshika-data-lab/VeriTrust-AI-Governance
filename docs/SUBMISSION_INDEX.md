@@ -11,9 +11,9 @@
 
 ### 1️⃣ Live Application URL
 ```
-https://veritrust-ai-governance.streamlit.app
+https://veritrust-ai-governance.vercel.app
 ```
-*(Deployed 100% free via Streamlit Community Cloud with 1 click from `app.py` in the GitHub repo, or see `docs/DEPLOYMENT_GUIDE.md` for instant deployment instructions)*
+*(Alternative / Local Evaluation Tunnel: Run `python run_app.py` and `npx localtunnel --port 3000` to get an instant live public URL of the React dashboard, or see `docs/DEPLOYMENT_GUIDE.md`)*
 
 ---
 
