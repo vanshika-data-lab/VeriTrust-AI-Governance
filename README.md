@@ -268,9 +268,11 @@ npm run dev
 | **Live Application URL** | `https://veri-trust-ai-governance.vercel.app` |
 | **Backend API URL** | `https://veritrust-ai-governance-1.onrender.com` |
 | **GitHub Repository** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance` |
-| **Architecture Diagram** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.md` |
-| **Technical Documentation** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.md` |
-| **Database Model** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.md` |
+| **Architecture Diagram (PDF)** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.pdf` |
+| **Architecture Diagram (PNG)** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.png` |
+| **Technical Documentation (PDF)** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.pdf` |
+| **Database Model (PDF)** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.pdf` |
+| **Database Model (PNG)** | `https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.png` |
 
 ---
 

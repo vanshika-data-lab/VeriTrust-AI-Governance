@@ -13,7 +13,7 @@
 ```
 https://veri-trust-ai-governance.vercel.app
 ```
-* **Frontend Application (Vercel)**: [https://veri-trust-ai-governance.vercel.app](https://veri-trust-ai-governance.vercel.app)
+* **Frontend Web Application (Vercel)**: [https://veri-trust-ai-governance.vercel.app](https://veri-trust-ai-governance.vercel.app)
 * **Backend Governance API (Render)**: [https://veritrust-ai-governance-1.onrender.com](https://veritrust-ai-governance-1.onrender.com)
 * **Swagger API Documentation**: [https://veritrust-ai-governance-1.onrender.com/docs](https://veritrust-ai-governance-1.onrender.com/docs)
 * **API Health Check Endpoint**: [https://veritrust-ai-governance-1.onrender.com/api/health](https://veritrust-ai-governance-1.onrender.com/api/health)
@@ -21,33 +21,32 @@ https://veri-trust-ai-governance.vercel.app
 ---
 
 ### 2️⃣ Architecture Diagram Link or Document Folder Link
-*(Share a PDF, PNG or Visio link etc)*
+*(PDF / High-Resolution PNG)*
 
 ```
-https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.md
+https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.pdf
 ```
-* **Interactive HTML & PDF View**: [`docs/architecture_diagram.html`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/architecture_diagram.html)
-* **Mermaid & Markdown Source**: [`docs/ARCHITECTURE_DIAGRAM.md`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.md)
+* **PDF Format**: [`docs/ARCHITECTURE_DIAGRAM.pdf`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.pdf)
+* **High-Resolution PNG (300 DPI)**: [`docs/ARCHITECTURE_DIAGRAM.png`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/ARCHITECTURE_DIAGRAM.png)
 
 ---
 
 ### 3️⃣ Technical Documentation Link or Document Folder Link
-*(Microsoft OneDrive or Google Docs / PDF / Notion etc)*
+*(PDF Format Only)*
 
 ```
-https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.md
+https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.pdf
 ```
-* **Full Technical Dossier (Markdown)**: [`docs/TECHNICAL_DOCUMENTATION.md`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.md)
-* **Interactive HTML & Print-to-PDF**: [`docs/technical_documentation.html`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/technical_documentation.html)
+* **Official PDF Dossier**: [`docs/TECHNICAL_DOCUMENTATION.pdf`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/TECHNICAL_DOCUMENTATION.pdf)
 
 ---
 
 ### 4️⃣ Database/Data Model Link
-*(ER Diagram / Graph Model / Schema etc)*
+*(PDF / High-Resolution PNG)*
 
 ```
-https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.md
+https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.pdf
 ```
-* **Data Model & ER Diagram (Markdown)**: [`docs/DATABASE_DATA_MODEL.md`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.md)
-* **Interactive ER Diagram Viewer (HTML)**: [`docs/database_data_model.html`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/database_data_model.html)
+* **PDF Format**: [`docs/DATABASE_DATA_MODEL.pdf`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.pdf)
+* **High-Resolution PNG (300 DPI)**: [`docs/DATABASE_DATA_MODEL.png`](https://github.com/vanshika-data-lab/VeriTrust-AI-Governance/blob/main/docs/DATABASE_DATA_MODEL.png)
 * **SQL DDL & Schema**: Fully documented 5-table normalized schema (`use_cases`, `assessments`, `dimension_assessments`, `evidence_sources`, `knowledge_base`).
